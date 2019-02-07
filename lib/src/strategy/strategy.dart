@@ -1,7 +1,4 @@
-import 'package:games/src/game.dart';
-import 'package:games/src/move.dart';
-import 'package:games/src/player.dart';
-
-abstract class Strategy {
-  Move nextMove(Game game, Player player);
+/// An interface that defines a game strategy.
+abstract class Strategy<TMove> {
+  TMove nextMove();
 }
