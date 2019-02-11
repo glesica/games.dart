@@ -23,4 +23,28 @@ class PrisonerState extends State<PrisonersMove> {
     }
     return this;
   }
+
+  @override
+  Iterable<num> scores() {
+    if (_player1Move == null || _player2Move == null) {
+      return [null, null];
+    }
+
+    if (_player1Move == PrisonersMove.cooperate &&
+        _player2Move == PrisonersMove.cooperate) {
+      return [-1, -1];
+    }
+
+    if (_player1Move == PrisonersMove.cooperate &&
+        _player2Move == PrisonersMove.defect) {
+      return [-3, 0];
+    }
+
+    if (_player1Move == PrisonersMove.defect &&
+        _player2Move == PrisonersMove.cooperate) {
+      return [0, -3];
+    }
+
+    return [-2, -2];
+  }
 }

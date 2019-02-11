@@ -3,7 +3,8 @@ import 'package:games/src/strategy/strategy.dart';
 
 /// An implementation of a mixed strategy where each move has a weight
 /// that determines its probability of being chosen.
-class Mixed<TMove, TState extends State<TMove>> implements Strategy<TMove, TState> {
+class Mixed<TMove, TState extends State<TMove>>
+    implements Strategy<TMove, TState> {
   final Set<TMove> _moves = Set<TMove>();
 
   void addMove(TMove move, int weight) {

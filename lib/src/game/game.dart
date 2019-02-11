@@ -2,23 +2,24 @@ import 'dart:collection';
 
 import 'package:games/src/game/player.dart';
 import 'package:games/src/game/state.dart';
+import 'package:games/src/reporter/reporter.dart';
 
 class Game<TMove, TState extends State<TMove>> {
-  final Set<Player<TMove, TState>> _players = LinkedHashSet();
-
-  State<TMove> _state;
-
   Game(this._state);
 
-  TState get state => _state;
+  final Set<Player<TMove, TState>> _players = LinkedHashSet();
+
+  List<Reporter<TMove, TState>> _reporters = [];
+
+  State<TMove> _state;
 
   void addPlayer(Player<TMove, TState> player) {
     _players.add(player);
   }
 
-  void addReporter() {}
-
-  void report() {}
+  void addReporter(Reporter<TMove, TState> reporter) {
+    _reporters.add(reporter);
+  }
 
   void play({int iterations}) {
     iterations ??= 1;
@@ -37,6 +38,13 @@ class Game<TMove, TState extends State<TMove>> {
 
       _state = updatedState;
       report();
+    }
+  }
+
+  void report() {
+    final players = _players.map((p) => p.name);
+    for (final reporter in _reporters) {
+      reporter.report(players, _state);
     }
   }
 }

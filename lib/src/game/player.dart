@@ -25,14 +25,16 @@ class Player<TMove, TState extends State<TMove>> {
   int get hashCode => name.hashCode;
 
   @override
-  bool operator ==(other) => other is Player<TMove, TState> && name == other.name;
+  bool operator ==(other) =>
+      other is Player<TMove, TState> && name == other.name;
 
   TMove nextMove(TState state) => _nextMove(state);
 }
 
 typedef TMove NextMove<TMove, TState extends State<TMove>>(TState state);
 
-NextMove<TMove, TState> nextMoveFromStrategy<TMove, TState extends State<TMove>>(
-    Strategy<TMove, TState> strategy) {
+NextMove<TMove, TState>
+    nextMoveFromStrategy<TMove, TState extends State<TMove>>(
+        Strategy<TMove, TState> strategy) {
   return (TState state) => strategy.nextMove(state);
 }

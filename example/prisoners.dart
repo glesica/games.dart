@@ -13,6 +13,9 @@ void main() {
         name: 'frank',
         strategy: Pure(PrisonersMove.defect),
       ),
+    )
+    ..addReporter(
+      ScoresReporter(),
     );
   game.play();
 }

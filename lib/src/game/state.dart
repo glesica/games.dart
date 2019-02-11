@@ -3,4 +3,6 @@
 /// of that move to itself.
 abstract class State<TMove> {
   State<TMove> nextState(TMove move);
+
+  Iterable<num> scores();
 }
