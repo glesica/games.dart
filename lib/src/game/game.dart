@@ -1,8 +1,10 @@
+import 'dart:collection';
+
+import 'package:games/src/game/player.dart';
 import 'package:games/src/game/state.dart';
-import 'package:games/src/strategy/strategy.dart';
 
 class Game<TMove, TState extends State<TMove>> {
-  final Map<String, Strategy<TState>> _players = {};
+  final Set<Player<TMove, TState>> _players = LinkedHashSet();
 
   State<TMove> _state;
 
@@ -10,15 +12,31 @@ class Game<TMove, TState extends State<TMove>> {
 
   TState get state => _state;
 
-  void addPlayer(String name, Strategy<TState> strategy) {
-    _players[name] = strategy;
+  void addPlayer(Player<TMove, TState> player) {
+    _players.add(player);
   }
 
-  void checkpoint() {}
+  void addReporter() {}
+
+  void report() {}
 
   void play({int iterations}) {
     iterations ??= 1;
 
-    final nextState = _state.nextState(move)
+    for (var i = 0; i < iterations; i++) {
+      var updatedState = _state;
+
+      for (final player in _players) {
+        final move = player.nextMove(_state);
+        if (move == null) {
+          continue;
+        }
+
+        updatedState = updatedState.nextState(move);
+      }
+
+      _state = updatedState;
+      report();
+    }
   }
 }
