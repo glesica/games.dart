@@ -1,4 +1,4 @@
-An absolute bare-bones web app.
+# Games.dart
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+A framework and application for simulating and studying simple games.
+
