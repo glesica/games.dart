@@ -17,5 +17,5 @@ void main() {
     ..addReporter(
       ScoresReporter(),
     );
-  game.play();
+  game.playToCompletion();
 }

@@ -41,6 +41,12 @@ class Game<TMove, TState extends State<TMove>> {
     }
   }
 
+  void playToCompletion() {
+    while (!_state.hasCompleted) {
+      play();
+    }
+  }
+
   void report() {
     final players = _players.map((p) => p.name);
     for (final reporter in _reporters) {

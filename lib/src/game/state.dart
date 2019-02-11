@@ -2,7 +2,11 @@
 /// valid move, produce the state that results from application
 /// of that move to itself.
 abstract class State<TMove> {
-  State<TMove> nextState(TMove move);
+  bool get hasCompleted;
 
-  Iterable<num> scores();
+  bool get hasStarted;
+
+  Iterable<num> get scores;
+
+  State<TMove> nextState(TMove move);
 }
